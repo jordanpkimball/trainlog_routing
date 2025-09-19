@@ -8,12 +8,17 @@ $(shell mkdir -p world output filtered_ferry filtered_train filtered_bus world/a
 # sudo make bus bregion=europe
 bregion = ""
 
+# File override for bus router, defaults to bus_countries.wanted
+# Ex: only use the file bus_countries2.wanted
+# sudo make bus bfile="bus_countries2.wanted"
+bfile = "bus_countries.wanted"
+
 # Common variables for train and ferry
 WANTED_COUNTRIES := $(shell grep -v "\#" countries.wanted)
 COUNTRIES_PBF := $(addsuffix -latest.osm.pbf,$(addprefix world/,$(WANTED_COUNTRIES)))
 
 # New variables for bus
-BUS_WANTED_COUNTRIES := $(shell grep -v "\#" bus_countries.wanted | grep -i $(bregion))
+BUS_WANTED_COUNTRIES := $(shell grep -v "\#" $(bfile) | grep -i $(bregion))
 BUS_COUNTRIES_PBF := $(addsuffix -latest.osm.pbf,$(addprefix world/,$(BUS_WANTED_COUNTRIES)))
 
 # Download the raw source file of a country
