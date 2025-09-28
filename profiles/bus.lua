@@ -63,7 +63,8 @@ function setup()
       'height_restrictor',
       'arch',
       'bus',
-      'psv'
+      'psv',
+      'bus_trap'
     },
 
     access_tag_whitelist = Set {
